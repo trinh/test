@@ -1,0 +1,27 @@
+\providecommand{\noopsort}[1]{}
+\begin{thebibliography}{1}
+
+\bibitem{happel_book}
+J.~Happel and H.~Brenner.
+\newblock {\em Low Reynolds number hydrodynamics with special applications to
+  particulate media}, volume~1.
+\newblock Springer, 1983.
+
+\bibitem{howell_2003}
+P.~D. Howell.
+\newblock Surface-tension-driven flow on a moving curved surface.
+\newblock {\em J. Eng. Math.}, 45(3):283--308, 2003.
+
+\bibitem{myers_2002}
+T.~G. Myers, Jean P.~F. Charpin, and S.~J. Chapman.
+\newblock The flow and solidification of a thin fluid film on an arbitrary
+  three-dimensional surface.
+\newblock {\em Phys. Fluids}, 14:2788, 2002.
+
+\bibitem{roy_2002}
+R.V. Roy, A.~J. Roberts, and M.~E. Simpson.
+\newblock A lubrication model of coating flows over a curved substrate in
+  space.
+\newblock {\em J. Fluid Mech.}, 454(10):235--261, 2002.
+
+\end{thebibliography}

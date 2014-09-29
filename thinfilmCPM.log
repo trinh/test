@@ -1,0 +1,643 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.7.16)  29 SEP 2014 10:37
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**thinfilmCPM.tex -recorder
+(./thinfilmCPM.tex
+LaTeX2e <2014/05/01>
+Babel <3.9k> and hyphenation patterns for 79 languages loaded.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/revtex/revtex4-1.cls
+Document Class: revtex4-1 2010/07/25/20:33:00 4.1r (http://publish.aps.org/revt
+ex4/ for documentation)
+ Copyright (c) 2009 The American Physical Society.
+ mailto:revtex@aps.org
+ Licensed under the LPPL:
+http://www.ctan.org/tex-archive/macros/latex/base/lppl.txt
+ Arthur Ogawa <arthur_ogawa at sbcglobal dot net>
+ Based on work by David Carlisle <david at dcarlisle.demon.co.uk>.
+ltxutil[2010/07/25/20:33:00 4.1r utilities package (portions licensed from W. E
+. Baxter web at superscript.com)]
+LaTeX Info: Redefining \@centercr on input line 308.
+Class revtex4-1 Info: Repairing broken LaTeX eqnarray on input line 358.
+\eqncolsep=\skip41
+Class revtex4-1 Info: Repairing hyperref-unfriendly LaTeX definition of \mpfoot
+note on input line 433.
+Class revtex4-1 Info: Repairing broken LateX \@sect on input line 755.
+\intertabularlinepenalty=\count79
+\@tbpen=\count80
+\@arstrutbox@hline=\box26
+Class revtex4-1 Info: Repairing broken LaTeX \@xbitor on input line 1786.
+Class revtex4-1 Info: Making \typeout \long on input line 2046.
+ltxfront[2010/07/25/20:33:00 4.1r frontmatter package (AO,DPC)]
+\c@affil=\count81
+\c@collab=\count82
+\absbox=\box27
+ltxgrid[2010/07/25/20:33:00 4.1r page grid package (portions licensed from W. E
+. Baxter web at superscript.com)]
+\c@linecount=\count83
+\output@latex=\toks14
+\box@size@1=\box28
+\box@size@2=\box29
+\@protection@box=\box30
+\@topmark@saved=\toks15
+\footins@saved=\box31
+\footins@recovered=\box32
+\column@recovered=\box33
+\pagesofar=\box34
+\footsofar=\box35
+\pagegrid@col=\count84
+Class revtex4-1 Info: Overriding \@vspace, \@vspacer, \@no@pgbk, \@newline, and
+ \\  on input line 5578.
+\c@part=\count85
+\c@section=\count86
+\c@subsection=\count87
+\c@subsubsection=\count88
+\c@paragraph=\count89
+\c@subparagraph=\count90
+\abovecaptionskip=\skip42
+\belowcaptionskip=\skip43
+\c@figure=\count91
+\fbox@1=\box36
+\c@table=\count92
+\fbox@2=\box37
+\c@video=\count93
+\fbox@4=\box38
+\@bibdataout=\write3
+\widetext@top=\box39
+\widetext@bot=\box40
+Class revtex4-1 Info: Selecting society aps on input line 7542.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/revtex/aps4-1.rtx
+File: aps4-1 2010/07/25/20:33:00 4.1r (http://publish.aps.org/revtex4/ for docu
+mentation)
+Class revtex4-1 Info: RevTeX society APS selected on input line 31.
+)
+Class revtex4-1 Info: Selecting journal pre on input line 7544.
+Class revtex4-1 Info: APS journal PRE selected on input line 7545.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/revtex/aps10pt4-1.rtx
+File: aps10pt4-1 2010/07/25/20:33:00 4.1r (http://publish.aps.org/revtex4/ for 
+documentation)
+Class revtex4-1 Info: RevTeX pointsize 10pt selected on input line 30.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/textcase/textcase.sty
+Package: textcase 2004/10/07 v0.07 Text only upper/lower case changing (DPC)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks16
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip44
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks17
+\ex@=\dimen102
+)
+LaTeX Info: Redefining \text on input line 39.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen103
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count94
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count95
+\leftroot@=\count96
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count97
+\DOTSCASE@=\count98
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box41
+\strutbox@=\box42
+\big@size=\dimen104
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count99
+\c@MaxMatrixCols=\count100
+\dotsspace@=\muskip10
+\c@parentequation=\count101
+\dspbrk@lvl=\count102
+\tag@help=\toks18
+\row@=\count103
+\column@=\count104
+\maxfields@=\count105
+\andhelp@=\toks19
+\eqnshift@=\dimen105
+\alignsep@=\dimen106
+\tagshift@=\dimen107
+\tagwidth@=\dimen108
+\totwidth@=\dimen109
+\lineht@=\dimen110
+\@envbody=\toks20
+\multlinegap=\skip45
+\multlinetaggap=\skip46
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip47
+\bibsep=\skip48
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count106
+)
+Class revtex4-1 Info: Repairing natbib's \BibitemShut on input line 7549.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/revtex/revsymb4-1.sty
+Package: revsymb4-1 2010/07/25/20:33:00 4.1r (http://publish.aps.org/revtex4/ f
+or documentation)
+LaTeX Info: Redefining \frak on input line 95.
+LaTeX Info: Redefining \Bbb on input line 111.
+LaTeX Info: Redefining \REV@mathfrak on input line 119.
+))
+(/Users/trinh/Library/texmf/tex/latex/local/trinhcmd/trinhcmd.sty
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2004/08/06 v2.20
+\thm@style=\toks22
+\thm@bodyfont=\toks23
+\thm@headfont=\toks24
+\thm@notefont=\toks25
+\thm@headpunct=\toks26
+\thm@preskip=\skip49
+\thm@postskip=\skip50
+\thm@headsep=\skip51
+\dth@everypar=\toks27
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup6
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/tools/bm.sty
+Package: bm 2004/02/26 v1.1c Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup7
+\symboldletters=\mathgroup8
+\symboldsymbols=\mathgroup9
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 137.
+LaTeX Info: Redefining \bm on input line 203.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/mh/empheq.sty
+Package: empheq 2013/02/12 v2.13 Emphasizing equations
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/mh/mhsetup.sty
+Package: mhsetup 2010/01/21 v1.2a programming setup (MH)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/mh/mathtools.sty
+Package: mathtools 2014/05/21 v1.14 mathematical typesetting tools
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
+\KV@toks@=\toks28
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count107
+\calc@Bcount=\count108
+\calc@Adimen=\dimen111
+\calc@Bdimen=\dimen112
+\calc@Askip=\skip52
+\calc@Bskip=\skip53
+LaTeX Info: Redefining \setlength on input line 75.
+LaTeX Info: Redefining \addtolength on input line 76.
+\calc@Ccount=\count109
+\calc@Cskip=\skip54
+)
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
+\g_MT_multlinerow_int=\count110
+\l_MT_multwidth_dim=\dimen113
+\origjot=\skip55
+\l_MT_shortvdotswithinadjustabove_dim=\dimen114
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen115
+\l_MT_above_intertext_sep=\dimen116
+\l_MT_below_intertext_sep=\dimen117
+\l_MT_above_shortintertext_sep=\dimen118
+\l_MT_below_shortintertext_sep=\dimen119
+)
+\l_EQ_equationtype_int=\count111
+\l_EQ_alignmentmode_int=\count112
+\l_EQ_totalwidth_dim=\dimen120
+\l_EQ_displaywidth_dim=\dimen121
+\l_EQ_temp_linewidth_dim=\dimen122
+\EmphEqdelimitershortfall=\dimen123
+\EmphEqdelimiterfactor=\count113
+\g_EQ_toptag_height_dim=\dimen124
+\g_EQ_bottomtag_depth_dim=\dimen125
+\g_EQ_toprow_height_dim=\dimen126
+\g_EQ_bottomrow_depth_dim=\dimen127
+\g_EQ_widesttag_dim=\dimen128
+\EQ_mathdisplay_box=\box43
+\EQ_tag_box=\box44
+\g_EQ_temprow_int=\count114
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Package option `usenames' ignored on input line 216.
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count115
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 2014/04/23 v3.0j Driver-dependant file (DPC,SPQR)
+)))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2013/05/23 v2.5a Micro-typographical refinements (RS)
+\MT@toks=\toks29
+\MT@count=\count116
+LaTeX Info: Redefining \textls on input line 766.
+\MT@outer@kern=\dimen129
+LaTeX Info: Redefining \textmicrotypecontext on input line 1285.
+\MT@listname@count=\count117
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/microtype-pdftex.def
+File: microtype-pdftex.def 2013/05/23 v2.5a Definitions specific to pdftex (RS)
+
+LaTeX Info: Redefining \lsstyle on input line 915.
+LaTeX Info: Redefining \lslig on input line 915.
+\MT@outer@space=\skip56
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2013/05/23 v2.5a microtype main configuration file (RS)
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/04/25 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+)
+\Gin@req@height=\dimen130
+\Gin@req@width=\dimen131
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/rotating/rotating.sty
+Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@r@tfl@t=\count118
+\rotFPtop=\skip57
+\rotFPbot=\skip58
+\rot@float@box=\box45
+\rot@mess@toks=\toks30
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/tools/dcolumn.sty
+Package: dcolumn 2001/05/28 v1.06 decimal alignment package (DPC)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen132
+\extrarowheight=\dimen133
+\NC@list=\toks31
+\extratabsurround=\skip59
+\backup@length=\skip60
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/was/upgreek.sty
+Package: upgreek 2003/02/12 v2.0 (WaS)
+Package upgreek Info: Using Euler Roman for upright Greek on input line 31.
+\symugrf@m=\mathgroup10
+LaTeX Font Info:    Overwriting symbol font `ugrf@m' in version `bold'
+(Font)                  U/eur/m/n --> U/eur/b/n on input line 38.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/preview/preview.sty
+Package: preview 2010/02/14 11.86 (AUCTeX/preview-latex)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/preview/prtightpage.def
+\PreviewBorder=\dimen134
+))
+\c@theo=\count119
+Class revtex4-1 Info: Patching array package. on input line 67.
+Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 67.
+
+Class revtex4-1 Info: cite was not loaded (OK!) on input line 67.
+Class revtex4-1 Info: mcite was not loaded (OK!) on input line 67.
+Class revtex4-1 Info: multicol was not loaded (OK!) on input line 67.
+
+(./thinfilmCPM.aux
+
+LaTeX Warning: Label `stokes' multiply defined.
+
+
+LaTeX Warning: Label `stokes12' multiply defined.
+
+
+LaTeX Warning: Label `stokes3' multiply defined.
+
+
+LaTeX Warning: Label `presfree' multiply defined.
+
+
+LaTeX Warning: Label `curvereduce' multiply defined.
+
+)
+\openout1 = `thinfilmCPM.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 67.
+LaTeX Font Info:    ... okay on input line 67.
+\Hy@linkcounter=\count120
+ (/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count121
+\scratchdimen=\dimen135
+\scratchbox=\box46
+\nofMPsegments=\count122
+\nofMParguments=\count123
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count124
+\MPscratchDim=\dimen136
+\MPnumerator=\count125
+\makeMPintoPDFobject=\count126
+\everyMPtoPDFconversion=\toks33
+)
+LaTeX Info: Redefining \microtypecontext on input line 67.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `basictext'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+ (/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
+(RS)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\openout3 = `thinfilmCPMNotes.bib'.
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 90.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 90.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 90.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/jknapltx/ursfs.fd
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/microtype/mt-eur.cfg
+File: mt-eur.cfg 2006/07/31 v1.1 microtype config. file: AMS Euler Roman (RS)
+)
+
+Class revtex4-1 Warning: If you want your keywords to appear in your output, us
+e document class option showkeys.
+
+[1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (1.92377pt too wide) detected at line 144
+\OML/cmm/m/it/10 m[]m[][] \OT1/cmr/m/n/10 + [] [] + [] [] = 0\OML/cmm/m/it/10 ;
+
+ []
+
+
+LaTeX Warning: Reference `scalereduce' on page 2 undefined on input line 159.
+
+
+LaTeX Warning: Reference `scalings' on page 2 undefined on input line 167.
+
+[2]
+
+LaTeX Warning: Reference `hkdef2' on page 3 undefined on input line 209.
+
+
+Overfull \hbox (34.39603pt too wide) in paragraph at lines 238--238
+[] 
+ []
+
+
+Overfull \hbox (48.56956pt too wide) detected at line 276
+[] \OMS/cmsy/m/n/10 ^^@ r[] ^^A [] \OML/cmm/m/it/10 :
+ []
+
+
+Overfull \hbox (15.04312pt too wide) detected at line 281
+[]
+ []
+
+[3]
+
+Package natbib Warning: Citation `Ruuth/Merriman:jcp08:CPM' on page 4 undefined
+ on input line 309.
+
+
+Package natbib Warning: Citation `Maerz/Macdonald:cpfunctions' on page 4 undefi
+ned on input line 323.
+
+
+Package natbib Warning: Citation `Ruuth/Merriman:jcp08:CPM' on page 4 undefined
+ on input line 326.
+
+
+Package natbib Warning: Citation `Ruuth/Merriman:jcp08:CPM' on page 4 undefined
+ on input line 339.
+
+
+Package natbib Warning: Citation `Maerz/Macdonald:cpfunctions' on page 4 undefi
+ned on input line 339.
+
+
+Package natbib Warning: Citation `Ruuth/Merriman:jcp08:CPM' on page 4 undefined
+ on input line 361.
+
+
+Package natbib Warning: Citation `Maerz/Macdonald:cpfunctions' on page 4 undefi
+ned on input line 361.
+
+
+Package natbib Warning: Citation `vonGlehn:mol' on page 4 undefined on input li
+ne 376.
+
+
+Package natbib Warning: Citation `Ruuth/Merriman:jcp08:CPM' on page 4 undefined
+ on input line 413.
+
+[4]
+
+Package natbib Warning: Citation `cbm:icpm' on page 5 undefined on input line 4
+53.
+
+[5]
+Overfull \hbox (112.26187pt too wide) in paragraph at lines 482--482
+[] 
+ []
+
+
+Overfull \hbox (72.34445pt too wide) detected at line 533
+\OML/cmm/b/it/10 n \OT1/cmr/m/n/10 = [] = [] = []\OML/cmm/m/it/10 :
+ []
+
+
+Overfull \hbox (10.17899pt too wide) detected at line 540
+ []$[] \OT1/cmr/m/n/10 + [] []$ []  
+ []
+
+(./thinfilmCPM.bbl)
+
+Package natbib Warning: There were undefined citations.
+
+[6] (./thinfilmCPM.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 7945 strings out of 493108
+ 113726 string characters out of 6134847
+ 307649 words of memory out of 5000000
+ 11158 multiletter control sequences out of 15000+600000
+ 19938 words of font info for 109 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 39i,19n,38p,756b,250s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
+usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/
+local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
+cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/lo
+cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></us
+r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/
+texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/tex
+live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texliv
+e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
+/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2
+014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/201
+4/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2014/t
+exmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/20
+14/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb>
+Output written on thinfilmCPM.pdf (6 pages, 265261 bytes).
+PDF statistics:
+ 107 PDF objects out of 1000 (max. 8388607)
+ 77 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 17409 words of extra memory for PDF output out of 20736 (max. 10000000)
+

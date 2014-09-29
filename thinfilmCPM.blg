@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2014)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: thinfilmCPM.aux
+The style file: plain.bst
+Database file #1: thinfilmCPMNotes.bib
+Database file #2: /Users/trinh/Dropbox/documents/bib/philmaster.bib
+Warning--I didn't find a database entry for "Ruuth/Merriman:jcp08:CPM"
+Warning--I didn't find a database entry for "Maerz/Macdonald:cpfunctions"
+Warning--I didn't find a database entry for "vonGlehn:mol"
+Warning--I didn't find a database entry for "cbm:icpm"
+You've used 4 entries,
+            2118 wiz_defined-function locations,
+            533 strings with 4803 characters,
+and the built_in function-call counts, 1268 in all, are:
+= -- 122
+> -- 56
+< -- 1
++ -- 24
+- -- 18
+* -- 94
+:= -- 221
+add.period$ -- 12
+call.type$ -- 4
+change.case$ -- 20
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 45
+empty$ -- 100
+format.name$ -- 18
+if$ -- 254
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 5
+newline$ -- 24
+num.names$ -- 8
+pop$ -- 18
+preamble$ -- 2
+purify$ -- 17
+quote$ -- 0
+skip$ -- 28
+stack$ -- 0
+substring$ -- 84
+swap$ -- 5
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 14
+warning$ -- 0
+while$ -- 13
+width$ -- 5
+write$ -- 47
+(There were 4 warnings)
