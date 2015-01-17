@@ -18,6 +18,7 @@ reprint,%
 % \usepackage{amsmath, amsthm, amssymb}
 \usepackage{upgreek}
 \usepackage{natbib}
+\usepackage[pdfauthor={Philippe H. Trinh}]{hyperref}
 \usepackage[inactive, tightpage]{preview}
 
 \DeclareMathOperator{\Div}{div}
@@ -36,14 +37,16 @@ reprint,%
 
 \newcommand{\lap}{\Delta}
 \newcommand{\grad}{\nabla}
-\newcommand{\slap}{\lap_{\surf}}
 \newcommand{\sgrad}{\grad_{\surf}}
+\newcommand{\slap}{\sgrad^2}
 \newcommand{\sDiv}{\Div_{\surf}}
 \newcommand{\sInt}{\int\limits_{\surf}}
 
 \newcommand{\dx}{h}
 \newcommand{\dt}{\tau}
 
+% Mathematical constants
+\newcommand{\ep}{\epsilon}
 \newcommand{\Real}{\mathbb{R}}
 
 \newcommand{\todo}[1]{\textbf{\textcolor{blue}{TODO: #1}}}
@@ -56,9 +59,39 @@ reprint,%
 \newtheorem{lem}[theo]{Lemma}
 \newtheorem{prop}[theo]{Proposition}
 
-\newcommand{\ea}{\mb{e}_1}
-\newcommand{\eb}{\mb{e}_2}
-\newcommand{\ec}{\mb{e}_3}
+% Vectors
+\newcommand*{\x}{\bm{x}}
+\newcommand*{\xhat}{\hat{\bm{x}}}
+\newcommand{\ea}{\hat{\bm{e}}_1}
+\newcommand{\eb}{\hat{\bm{e}}_2}
+\newcommand{\ec}{\hat{\bm{n}}}
+\newcommand{\ek}{\hat{\bm{e}}_k}
+\newcommand*{\n}{\mb{n}}
+\newcommand*{\hatg}{\hat{\mb{g}}}
+\renewcommand*{\r}{\mb{r}}
+
+% Physical constants
+\renewcommand*{\Rey}{\mathrm{Re}}
+\newcommand*{\Bo}{\mathrm{Bo}}
+\newcommand*{\Cn}{\mathscr{C}}
+\newcommand*{\Bn}{\mathscr{B}}
+
+\newcommand*{\rs}{\bm{R}}
+\newcommand*{\K}{\mathcal{K}}
+\newcommand*{\E}{\mathrm{E}}
+\newcommand*{\F}{\mathrm{F}}
+\newcommand*{\G}{\mathrm{G}}
+\renewcommand*{\L}{\mathrm{L}}
+\newcommand*{\M}{\mathrm{M}}
+\newcommand*{\N}{\mathrm{N}}
+\newcommand*{\Q}{\bm{Q}}
+\renewcommand{\t}[1]{\tilde{#1}}
+
+\newcommand*{\dsa}{\operatorname{\partial_{s_1}\!}}
+\newcommand*{\dsb}{\operatorname{\partial_{s_2}\!}}
+\newcommand*{\dsaa}{\operatorname{\partial_{s_1}^2\!}}
+\newcommand*{\dsab}{\operatorname{\partial_{s_1 s_2}^2\!}}
+\newcommand*{\dsbb}{\operatorname{\partial_{s_2}^2\!}}
 
 \renewcommand{\ol}[1]{\overline{#1}}
 
@@ -81,7 +114,7 @@ reprint,%
 \date{\today}
 
 \begin{abstract}
-We present a numerical study of gravity-driven thin film flows on curved surfaces. We are particularly motivated by the aspect of gravity-driven fingering instabilities. 
+We present a numerical study of gravity-driven thin film flows on curved surfaces including the effects of surface tension. We are particularly motivated by the aspect of gravity-driven fingering instabilities. 
 \end{abstract}
 
 
@@ -95,237 +128,166 @@ There is much interest in the study of thin film dynamics on general curved surf
 
 Much of the research is based on surfaces that are easily parameterized: cylinders, tori. 
 
-Two physical problems of interest:
+Many physical problems of interest:
 \begin{enumerate}
-\item Work of Mayo et al on gravity-driven instabilities
-\item Work of Trinh, Lister, etc. on Rayleigh-Taylor instability
+\item Work of Mayo et al \cite{mayo_2013} on gravity-driven instabilities
+\item Work of Trinh\cite{trinh_2014}, Lister, etc. on Rayleigh-Taylor instability
+\item Work of Takagi and Huppert \cite{takagi_2010} on gravity-driven flow on a sphere
 \end{enumerate}
 
 \section{Thin film equations}
 
+\noindent We consider the flow of a viscous, incompressible fluid on the surface of a two-dimensional solid substrate, $\mathcal{S} \subset \mathbb{R}^3$, under the influence of gravity and surface tension (Fig.~\mbox{[---]}). In this section, we shall recapitulate the essential details behind the derivation of the lubrication equations on general surfaces. Our equations follow from a combination of Howell~\cite{howell_2003} and \citeauthor{myers_2002}~\cite{myers_2002}, but makes a small correction to the free-surface curvature in the latter work. Additional details concerning the differential geometry can also be found in the work by \citeauthor{roy_2002}~\cite{roy_2002}. 
+
 \subsection{Parameterization and non-dimensionalization}
 
-For clarity and completeness, we recapitulate the essential details behind the derivation of the lubrication equations on general surfaces. Our equations follow from Howell \cite{howell_2003}, with additional details found in \cite{myers_2002} and \cite{roy_2002}. 
-
-Let us consider thin film flow on a two-dimensional surface, $\mathcal{S} \subset \mathbb{R}^3$. Every point on the surface is characterized by a normal vector $\mb{n}$, and two principal curvatures, denoted $\kappa_1$ and $\kappa_2$, with $\kappa_1 \leq \kappa_2$. We define a mapping from the Cartesian $(x,y,z)$ system to an orthogonal curvilinear coordinate system given by $(s_1, s_2, n)$, where $s_1$ and $s_2$-curves are lines of constant principal curvature, and $n$ is distance measured in the normal direction from the surface. If $\mb{e}_1$, $\mb{e}_2$, and $\mb{e}_3$ denote the unit orthogonal vectors for the coordinate system, then a general point in space is given by the position vector
-\begin{equation}
-\mb{r}(s_1, s_2, n) = \mb{r}_c(s_1, s_2) + n \mb{e}_3, 	
+Every point on the surface, $\mathcal{S}$, is characterized by a normal vector $\mb{n}$, and two principal curvatures, denoted $\kappa_1$ and $\kappa_2$, with $\kappa_1 \leq \kappa_2$. We define a mapping from the Cartesian $(x,y,z)$ system to an orthogonal curvilinear coordinate system given by $(s_1, s_2, s_3)$, where $s_1$ and $s_2$-curves are lines of constant principal curvature, and $s_3$ is distance measured in the normal direction from the surface. If $\mb{e}_1$, $\mb{e}_2$, and $\bm{n}$ respectively denote the unit orthogonal vectors for the coordinate system, then a general point in space is given by the position vector
+\begin{equation} \label{rvec}
+\mb{r}(s_1, s_2, s_3) = \rs(s_1, s_2) + s_3 \bm{n},
 \end{equation}
 %
-where the surface is given by $\mb{r}_c = \mb{r}_c(s_1, s_2)$. In order to properly move between Cartesian and curvilinear derivatives, we require the surface scale factors, defined by $a_k = \lvert \pd{\mb{r}_c}{s_k}\rvert$, and spatial scale factors, $m_k = \lvert \pd{\mb{r}}{q_k}\rvert$. It then follows that $m_1 = a_1(1 - \kappa_1 n)$, $m_2 = a_2(1 - \kappa_2 n)$, and $m_3 = 1$. With these scale factors, formulae for vector operators can be found from [---]. 
+where the surface is given by $\rs= \rs(s_1, s_2)$, and the fluid surface is given by $s_3 = h(s_1, s_2, t)$. Note that the parameterization by the lines of constant curvature is particularly convenient for the derivation, but once the governing equations have been derived with surface operators, other coordinate systems can be used. 
 
-We now non-dimensionalize, with the key consideration being that the scaling of the thin film is small compared to the scaling along the substrate. We will dimensionalize the problem so that the pressure, $p$, balances the free surface curvature, $\scr{K}$. The scaling on the velocities come from balancing the viscous term with the pressure term in the momentum equations. The scalings are:
-\begin{gather}
-[\kappa_1] = [\kappa_2] = 1/a, \ [p] = \gamma/a, \\
-[s_1] = [s_2] = L, \ [n] = \delta L, \\ 
-[u_1] = [u_2] = \frac{\delta^2 \gamma L}{\mu a}, \ [u_3] = \frac{\delta^3 \gamma L}{\mu a}, \\ 
-[t] = \frac{\mu a}{\delta^2 \gamma}. 
-% \\ [\sigma_{ij}] = \frac{\gamma}{a}.
-\end{gather}
-
-The key consideration to follow is in regards to how the length scale, $L$ of $s_1$ and $s_2$, compare to the substrate curvature $1/a$. We use these scalings and relabel all the variables to be non-dimensional. Notice that under this non-dimensionalisation, the scaling factors become $m_1 = a_1 + \Oh(\delta L/a)$, $m_2 = a_2 + \Oh(\delta L/a)$, and $m_3 = 1$.
-
-\subsection{Lubrication equations}
-
-We consider incompressible flow of fluid, given by a velocity field $\mb{u} = u_1 \ea + u_2 \eb + u_3 \ec$. We assume the fluid possesses a free surface, given by $n = h(x_1, x_2, t)$. On the substrate, the fluid satisfies no-flux condition and zero-slip conditions, $\mb{u} = 0$, on $n = 0$.	
-
-On the free surface, $n = h(s_1, s_2, t)$, the fluid satisfies the kinematic and dynamic conditions, 
-\begin{gather}
-u_3 = \pd{h}{t} + \frac{u_1}{m_1} \pd{h}{x_1} + \frac{u_2}{m_2} \pd{h}{x_2} \\
-\mb{n} \cdot (\sigma_{ij} n_j) =  -\gamma \scr{K}, \quad \text{and} \quad 
-\mb{t} \cdot (\sigma_{ij} n_j) =  0 
-\end{gather}
-%
-where $\mb{t}$ is the tangent and $\mb{n} = [n_1, n_2, n_3]$, the normal, at a point on the surface, $n = h(x_1, x_2, t)$, $\sigma = (\sigma)_{ij}$ is the stress tensor, given in (\ref{stress}), and $\scr{K}$ is twice the mean curvature.
-
-We integrate the continuity equation, $\nabla \cdot \mb{u} = 0$, from $n = 0$ to $n = h$, and combine with the no-flux and kinematic condition to give the following conservation equation for the flux
-\begin{equation}
-m_1 m_2 \pd{h}{t} + \pd{}{x_1}\left[\int_0^h m_2 u_1 \, \de{n}\right] + \pd{}{x_2}\left[\int_0^h m_1 u_2 \, \de{n}\right] = 0,
+We assume that the velocity field of the fluid is given by $\mb{u} = u_1 \ea + u_2 \eb + u_3 \ec$, and take advantage of the thin-film approximation using the following non-dimensionalization:
+\begin{equation}\label{nondim}
+\begin{gathered}
+\left[s_1\right] = \left[s_2\right] = L, \ [s_3] = \delta L, \\
+[\kappa_1] = [\kappa_2] = 1/L, \\
+[u_1] = [u_2] = U, \ [u_3] = \delta U, \\ 
+[p] = \mu U/(\delta^2 L), \ [t] = L/U.
+\end{gathered}
 \end{equation}
 %
-on $n = h$. Turning to the dimensional momentum equations, the relevant terms once the thin film limit is applied will only involve the following terms
-\begin{subequations} \label{stokes}
-\begin{align}
-\frac{1}{a_k} \pd{p}{x_k} &= \pdd{u_k}{n} + \rho g (\hat{\mb{g}} \cdot \mb{e}_k) + \ldots, \qquad k = 1, 2\label{stokes12} \\
-\pd{p}{n} &= \rho g (\hat{\mb{g}} \cdot \mb{e}_3) + \ldots \label{stokes3}
-\end{align}
-\end{subequations}
+Our key assumption is that the aspect ratio of the thin film is small, with $\delta \ll 1$. Notice that different from Howell~\cite{howell_2003}, we have chosen to scale the principal curvatures, $\kappa_1$ and $\kappa_2$ using the spatial scaling, $L$ (rather than introduce a separate curvature scale). In this work, we shall proceed with the assumption that $\kappa_i = \Oh(1)$, but but this may not always hold (e.g. near a sharp corner). The velocity scales are chosen according to the continuity equation, and the pressure scale is the typical slow-flow scaling so as to balance the viscous contributions. In what follows, we shall assume that all quantities have been non-dimensionalized according to \ref{nondim}.
 
-Next, we reduce the momentum equations. Assuming that $\delta^2 \Rey = \rho[u] L/\mu \ll 1$, we are left with the usual Stokes equations that include the bond number, 
-\[
-B = \frac{\rho g L^2}{\mu [u_1]} = \frac{\rho g La}{\gamma}
-\]
-
-\noindent Performing the analogous scalings for the rest of the momentum equations and using the reduction of the scale factors \eqref{scalereduce} gives
-\begin{subequations} \label{stokes}
-\begin{align}
-\frac{1}{a_k} \pd{p_k}{x_k} &= \pdd{u_k}{n} + B \mb{g} \cdot \mb{e}_k + \Oh(\delta^2), \qquad k = 1, 2\label{stokes12} \\
-\pd{p_3}{n} &= \Oh(\delta B, \delta^2). \label{stokes3}
-\end{align}
-\end{subequations}
-
-\noindent \emph{Remark about signs of curvature}: Notice that depending on whether the thin film is on the outside or inside of the substrate, the defined curvatures may be negative. We will always assume that $a > 0$ and all length scales in \eqref{scalings} to be positive, \emph{e.g.} flow on the outside or inside of a circular cylinder has curvature $\kappa = \mp 1/a$. 
-
-\subsection{Boundary conditions}
-
-In order to derive the reduced free-surface conditions, we expand the normal $\mb{n}$, tangential vector, $\mb{t}$, and stress components $\sigma_{ij}$ in powers of the aspect ratio, $\delta$. After work, it can be seen that the two tangential stress conditions are
-\begin{align}
-\pd{u_1}{n} + \left(\frac{\delta L}{a}\right) \frac{u_1 a_1 \kappa_1}{\tilde{m_1}} &= \Oh(\delta), \\ 
-\pd{u_2}{n} +  \left(\frac{\delta L}{a}\right) \frac{u_2 a_2 \kappa_2}{\tilde{m_2}} &= \Oh(\delta).
-\end{align}
-
-The normal stress condition, $\mb{n} \cdot \mb{F}$, is 
-\begin{equation} \label{presfree}
--p = \scr{K} + \Oh(\delta^2) \qquad \text{on $n = h(x_1, x_2, t)$},
-\end{equation}
-
-\noindent where the full curvature is given in \eqref{curv}.In fact, the curvature can be expanded:
-\begin{equation} \label{curvereduce}
-\scr{K} = (\kappa_1 + \kappa_2) + \frac{\delta a}{L} \nabla_s^2 h + \frac{\delta L}{a} (\kappa_1^2 + \kappa_2^2) + \Oh(\delta^2)
-\end{equation}
-
-\noindent and $\nabla_s$ is the surface Laplacian with respect to the substrate:
-\begin{equation}
-\nabla_s^2 = \frac{1}{a_1 a_2} \left[ \pd{}{x_1} \left( \frac{a_2}{a_1} \pd{}{x_1}\right) + \pd{}{x_2} \left(\frac{a_1}{a_2} \pd{}{x_2}\right)\right].
-\end{equation}
-
-
-\newpage
-
-The elements of the non-dimensionalized stress tensor, which should be scaled with $\gamma/a$ are given by \eqref{stress}, or  
-\begin{subequations} \label{stressre}
-\begin{align}
-\sigma_{11} &= -p + \Oh(\delta^2)  \\ 
-\sigma_{22} &= -p + \Oh(\delta^2) \\ 
-\sigma_{33} &= -p + \Oh(\delta^2) \\ 
-\sigma_{12} &= \frac{\delta^2}{m_1 m_2} \left[ m_1 \pd{u_1}{x_2} - \pd{m_1}{x_2} u_1 + m_2 \pd{u_2}{x_1} - \pd{m_2}{x_1} u_2 \right] \\ 
-\sigma_{13} &= \delta \pd{u_1}{n} - \delta^2 \left(\frac{L}{a}\right) \frac{u_1}{m_1} \pd{m_1}{n} + \Oh(\delta^3) \\ 
-\sigma_{23} &= \delta \pd{u_2}{n} -  \delta^2 \left(\frac{L}{a}\right) \frac{u_2}{m_2} \pd{m_2}{n} + \Oh(\delta^3).
-\end{align}
-\end{subequations}
-
-\noindent where we note that $\partial m_i/\partial n = -a_i \kappa_i$. 
-
-The surface is given by $n = h(x_1, x_2, t)$, or with $\mb{r}(x_1, x_2, n) = \mb{r}_c(x_1, x_2) + h(x_1, x_2, t) \ec$. Recalling the definitions of the scale factors \eqref{hkdef2}, we have two tangent vectors at the surface:
-\begin{align*}
-\tilde{\mb{t}}_1 = \pd{\mb{r}(x_1,x_2,h)}{x_1} &= \tilde{h}_1 \ea + \delta \pd{h}{x_1} \ec, \\ 
-\tilde{\mb{t}}_2 = \pd{\mb{r}(x_1,x_2,h)}{x_2} &= \tilde{h}_2 \ea + \delta \pd{h}{x_2} \ec,
-\end{align*}
-
-\noindent where
-\begin{equation}
-\tilde{h}_i = a_i \left(1 - \left(\tfrac{\delta L}{a} \right) \kappa_i h \right)
-\end{equation}
-
-\noindent are the scale factors evaluated on the surface. Notice that at this point we will not make any assumption on the size of $\delta L/a$ except that it is at most $\Oh(1)$. Henceforth, we use the notation of tilde to indicate surface quantities. 
-
-The outwards normal at the surface is given by 
-\begin{equation}
-\tilde{\mb{n}} = \frac{1}{c} \left[ -\frac{\delta }{m_1} \pd{h}{x_1} \ea - \frac{\delta }{m_2} \pd{h}{x_2} \eb + \ec\right],
-\end{equation}
-
-\noindent where $c = |\nabla (\delta n- \delta h)|$.
-
-The force on the free surface, $\mb{F} = \sigma_{ij} n_j$ is given by 
-\begin{equation}
+In order to characterize the distances and shapes of the substrate, $\rs$, and free surface, $\r$ with $s_3 = h$, we require the specification of the first and second fundamental forms. For the substrate, these are $\{\E, \F, \G, \L, \M, \N\}$, defined in \eqref{funform}, and with tildes using same notation for the free-surface quantities. We can verify that the metric coefficients are, 
+\begin{equation} \label{mcoef}
 \begin{split}
-\mb{F} &= \frac{1}{c}\left[\left(\frac{1}{\tilde{m_1}}\pd{h}{x_1}p + \pd{u_1}{n} \right) \delta 
-+ \left(\frac{\delta^2 L}{a}\right) \frac{u_1 a_1 \kappa_1}{\tilde{m_1}} + \Oh(\delta^3)\right]\ea \\ 
-&\qquad + \frac{1}{c}\left[\left(\frac{1}{\tilde{m_2}}\pd{h}{x_2}p + \pd{u_2}{n} \right) \delta 
-+ \left(\frac{\delta^2 L}{a}\right) \frac{u_2 a_2 \kappa_2}{\tilde{m_2}} + \Oh(\delta^3)\right]\eb \\ 
-&\qquad \qquad + \frac{1}{c}\biggl[ -p + \Oh(\delta^2) \biggr] \ec
+m_1^2 &= \|\r_1 \|^2 = \E(1 - \ep h \kappa_1)^2 + \Oh(\ep^2) \\
+m_2^2 &= \|\r_2 \|^2 = \G(1 - \ep h \kappa_2)^2 + \Oh(\ep^2) \\
+m_3^2 &= \|\r_3 \|^2 = \ep^2.
 \end{split}
 \end{equation}
+%
+where $a_1 = \|\rs_1\| = \sqrt{\E}$ and $a_2 = \|\rs_2\| = \sqrt{\G}$ are the metric coefficients for the substrate. For a given substrate geometry, once the metric coefficients are known, the vector operators such as the divergence, gradient, and curl can be calculated. 
+	
+\subsection{Lubrication equations}
 
-\noindent The two tangential stress conditions are $\mb{t}_1 \cdot \mb{F} = 0 = \mb{t}_2 \cdot \mb{F}$, and so 
+In this work, we assume that the fluid satisfies a no-flux and zero-slip conditions on the solid substrate. On the free surface, $s_3 = h(s_1, s_2, t)$, the fluid satisfies the kinematic and dynamic conditions. In total, 
+\begin{subequations}
 \begin{align}
-\pd{u_1}{n} + \left(\frac{\delta L}{a}\right) \frac{u_1 a_1 \kappa_1}{\tilde{m_1}} &= \Oh(\delta), \\ 
-\pd{u_2}{n} +  \left(\frac{\delta L}{a}\right) \frac{u_2 a_2 \kappa_2}{\tilde{m_2}} &= \Oh(\delta).
+u_1, u_2, u_3 = 0
+&\quad \text{on $s_3 = 0$} \label{zeroslip} \\
+u_1, u_2 = \Oh(\delta)  
+&\quad \text{on $s_3 = h$} \label{tanstress} \\
+u_3 = \pd{h}{t} + \frac{u_1}{m_1} \pd{h}{s_1} + \frac{u_2}{m_2} \pd{h}{s_2} 
+&\quad \text{on $s_3 = h$} \label{kinematic} \\
+\Delta p =  -\Cn \K + \Oh(\delta^2) 
+&\quad \text{on $s_3 = h$} \label{psurf}
 \end{align}
+\end{subequations}
+%
+where $\Delta p$ is the jump in the pressure across the free surface, $\K$ is twice the mean curvature and $\Cn = \gamma \delta^2/(\mu U)$ is an inverse Capillary number.
 
-\noindent The reason why we keep the $\delta L/a$ term is because in cases where there the surface and substrate curvatures are very different, this term will become $\Oh(1)$. 
+We integrate the continuity equation, $\nabla \cdot \mb{u} = 0$, over the thin film, and combine with the substrate \eqref{zeroslip} and kinematic \eqref{kinematic} conditions to give the following conservation equation for the flux
+\begin{subequations}
+\begin{equation}
+a_1 a_2 \pd{h}{t} + \pd{Q_1}{s_1} + \pd{Q_2}{s_2} = \Oh(\delta),
+\end{equation}
+%
+applied on $s_3 = h$, and where the fluxes are given by 
+\begin{equation} \label{flux1}
+Q_k = \int_0^h a_k' u_k \, \de{s_3} + \Oh(\delta)
+\end{equation} 
+\end{subequations}
+%
+and $a_1' = a_2$ and $a_2' = a_1$. Notice the neglected terms in the above expressions arise due to an approximation of the free-surface metric coefficients $m_i$ using the metric coefficients of the substrate.
 
-The normal stress condition, $\mb{n} \cdot \mb{F}$, is 
-\begin{equation} \label{presfree}
--p = \scr{K} + \Oh(\delta^2) \qquad \text{on $n = h(x_1, x_2, t)$},
+The non-dimensionalized slow flow equations are
+\begin{subequations} \label{stokes}
+\begin{align}
+\frac{1}{a_k} \pd{p}{s_k} &= \pdd{u_k}{s_3} + B (\hat{\mb{g}} \cdot \ek) + \Oh(\delta, \delta^2\Rey), \label{stokes12} \\
+\pd{p}{s_3} &= \delta \Bn (\hat{\mb{g}} \cdot \ec) + \Oh(\delta, \delta^2\Rey), \label{stokes3}
+\end{align}
+\end{subequations}
+%
+for $k = 1, 2$, and $\Bn = \rho g (\delta L)^2/(\mu U)$ is a non-dimensional parameter measuring the balance between gravitational and viscous effects, with body force magnitude $g$, corresponding to $\bm{g} = g\hatg$. Notice that the thin-film assumption will typically remove the $\Oh(\delta \Bn)$ component of gravity in the normal momentum equation. However, for certain geometries of interest (\eg flow on the underside of a sphere), this term may not be neglegible.
+
+Using the boundary conditions \eqref{zeroslip} and \eqref{tanstress}, we integrate the Stokes equations \eqref{stokes12} to obtain 
+\begin{equation}
+u_k = \left[\frac{1}{a_k} \pd{p}{s_k} - \Bn \hat{\mb{g}} \cdot \ek\right] \left[\frac{s_3^2}{2} - h s_3\right] + \Oh(\delta),
+\end{equation}
+%
+and thus the fluxes \eqref{flux1} are given by 
+\begin{equation}
+Q_k = -a_k'  \left[\frac{1}{a_k} \pd{p}{s_k} - \Bn \hat{\mb{g}} \cdot \bm{e}_k\right] \frac{h^3}{3} + \Oh(\delta).
 \end{equation}
 
-\noindent where the full curvature is given in \eqref{curv}.In fact, the curvature can be expanded:
+Substituting this result into the conservation equation then yields the leading-order result
+\begin{equation} \label{fluxform}
+\pd{h}{t} + \sgrad \cdot \Q = 0,
+\end{equation}
+%
+where $\sgrad = (\ea/a_1)\partial_{s_1} + (\eb/a_2)\partial_{s_2}$ is the surface gradient, and we have defined 
+\begin{equation}
+\Q = \frac{h^3}{3}\Bigl[-\sgrad p + \Bn \sum_{i=1}^2 (\hatg \cdot \mb{e_i})\mb{e_i} \Bigr].
+\end{equation}
+
+The surface pressure can be obtained by integrating \eqref{stokes3} and using the normal stress condition \eqref{psurf}, giving the fluid pressure, $p = -\Cn \K + \delta \Bn (\hatg \cdot \mb{e}_3) (s_3-h) + \Oh(\delta^2)$ (where we have assumed atmospheric pressure is zero). Thus the governing thin film equation is shown to be the flux form \eqref{fluxform} with 
+\begin{equation}
+\Q = \frac{h^3}{3}\biggl[\Cn\sgrad \K + \Bn \sum_{i=1}^2 (\hatg \cdot \mb{e_i})\mb{e_i} +\delta \Bn (\hatg \cdot \mb{e}_3) \sgrad h\biggr].	
+\end{equation}
+
+\subsection{Curvature}
+
+The most difficult element to incorporate in the derivation of the thin film equations is the nonlinear (twice) mean free-surface curvature, $\K$. This is given by a complicated expression in terms of the free surface fundamental forms,
+\begin{equation}
+	\K = \frac{\t{\L}\t{\G} - 2 \t{\M}\t{\F} + \t{\N}\t{\E}}{\t{\E}\t{\G} - \t{\F}^2}.
+\end{equation}
+
+In the Appendix, we show how, in the thin film limit, the expansion of the curvature matches
 \begin{equation} \label{curvereduce}
-\boxed{\scr{K} = (\kappa_1 + \kappa_2) + \frac{\delta a}{L} \nabla_s^2 h + \frac{\delta L}{a} (\kappa_1^2 + \kappa_2^2) + \Oh(\delta^2)}
-\end{equation}
-
-\noindent and $\nabla_s$ is the surface Laplacian with respect to the substrate:
-\begin{equation}
-\nabla_s^2 = \frac{1}{a_1 a_2} \left[ \pd{}{x_1} \left( \frac{a_2}{a_1} \pd{}{x_1}\right) + \pd{}{x_2} \left(\frac{a_1}{a_2} \pd{}{x_2}\right)\right].
-\end{equation}
-
-\noindent Notice that with the approximation \eqref{curvereduce}, the free-surface curvature is only a function of $(x_1, x_2, t)$, \emph{i.e.} the position on the substrate. 
-
-\subsection{Thin film PDE}
-
-We integrate the Stokes equations \eqref{stokes} to give 
-\begin{equation}
-u_k = \left(\frac{1}{a_k} \pd{p}{x_k} - B\mb{g} \cdot e_k\right)\left[  \frac{n^2}{2} - hn \right],
+\K = (\kappa_1 + \kappa_2) + \delta \slap h + \delta(\kappa_1^2 + \kappa_2^2)h + \Oh(\delta^2)
 \end{equation}
 %
-and use this in the conservation equation to give
+which matches the form in \cite{howell_2003, roy_2002}, but with a small correction to the derivation in \cite{myers_2002}.
+
+The crucial observation from the curvature expansion \eqref{curvereduce} is that we must consider three possibilities for the governing thin film equations. In the case of $\Oh(1)$ curvatures, $\kappa_1$ and $\kappa_2$ (as we have assumed throughout the previous section), the free-surface curvature, $\K$, is then approximately the substrate curvature. Thus in the absence of gravity, the thin-film equation is simply 
 \begin{equation}
-\pd{h}{t} - \nabla_s \cdot \left\{ \frac{h^3}{3}  \left[ \left( \frac{1}{a_1} \pd{p}{x_1} - B\mb{g} \cdot \ea\right)\ea  
-+ \left( \frac{1}{a_2} \pd{p}{x_2} - B\mb{g} \cdot \eb\right)\eb \right]\right\}.
+	\pd{h}{t} + \sgrad \cdot \left[\frac{h^3}{3} \Cn \sgrad (\kappa_1 + \kappa_2)\right] = 0.
 \end{equation}
 
-\noindent We can now use the connection between pressure and curvature in \eqref{presfree} to obtain
-\begin{equation} \label{thinfilm}
-\boxed{\pd{h}{t} + \nabla_s \cdot \left\{ \frac{h^3}{3} \left[\nabla_s \scr{K} + B\Bigl( (\mb{g} \cdot \ea)\ea + (\mb{g} \cdot \eb)\eb\Bigr) \right]\right\} = 0}
+However, in the case where both substrate curvatures are constant, such as the case of flow on a sphere, circular cylinder, or a flat surface, then the $\Oh(\delta)$ contributions in \eqref{curvereduce} must be included. This yields the governing equation 
+\begin{equation}
+	\pd{h}{t} + \delta \sgrad \cdot \left[\frac{h^3}{3} \Cn \sgrad \Bigl(\slap h + \delta(\kappa_1^2 + \kappa_2^2) \Bigr)\right] = 0.
 \end{equation}
 
-\noindent where 
-\[
-\nabla_s \scr{K} = \pd{\scr{K}}{x_1} \frac{\ea}{a_1} + \pd{\scr{K}}{x_2} \frac{\eb}{a_2}.
-\]
+The case of large curvatures will require preserving additional terms in the derivation. 
 
-\noindent Notice that \eqref{thinfilm} is the governing equation for the thin film that only depends on the surface gradients, $\nabla_s$. Although we have originally defined the surface gradients in terms of the lines of curvature coordinates, $x_1$ and $x_2$, we are now free to use another parameterization of the surface, and simply re-write the new surface gradient in terms of this parameterization. 
+\emph{Remark about signs of curvature}: Notice that depending on whether the thin film is on the outside or inside of the substrate, the defined curvatures may be negative. We will always assume that $L > 0$ and all length scales to be positive, and so \emph{e.g.} flow on the outside or inside of a circular cylinder has curvature $\kappa = \mp 1/L$. 
 
-%
-%Whose components are given in \eqref{stress}, and where $f_{ij} = \Oh(1)$ (note that the stress tensor is symmetric, but we have kept the indices as so for clarity). We write the normal and tangental vectors in the form
-%\begin{align}
-%\mb{n} &= \delta b_1 \ea + \delta b_2 \eb + \ec, \\ 
-%\mb{t}_1 &= \delta b_2 \ea - \delta b_1 \eb, \\
-%\mb{t}_2 &= \ea - \delta b_1 \ec.
-%\end{align}
-%
-%\noindent where $b_1, b_2 = \Oh(1)$ and are given on \eqref{surfnorm}. 
+\subsection{Examples}
 
-%\begin{gather}
-%\sigma_{11} = \sigma_{22} = \sigma_{33} = -p + \Oh(\delta^2) \\
-%\sigma_{12} = \Oh(\delta^2) \\ 
-%\sigma_{13} = \sigma_{23} = \Oh(\delta).
-%\end{gather}
-
-\newpage
+\begin{itemize}
+\item Give examples of surfaces to be considered later.
+\end{itemize}
 
 \section{The closest point method} \label{sec:cpm}
-The closest point method, introduced in \cite{Ruuth/Merriman:jcp08:CPM}, is an embedding technique for solving PDEs posed on embedded surfaces.
-The central idea is to extend functions and differential operators to the surrounding space (here $\Real^3$) and to solve an embedding equation which is
-a 3D-analog of the original equation. This is appealing since the extended versions of the operators $\sgrad$, $\sDiv$, and $\slap$
-in the closest point framework turn out to be $\grad$, $\Div$, and $\lap$.
-Hence, embedding equations are accessible to standard finite difference techniques and existing codes can be reused. 
 
-\todo{Explain surface diff ops}
+\noindent The closest point method, introduced in \cite{ruuth_2008}, is an embedding technique for solving PDEs posed on embedded surfaces. The central idea is to extend functions and differential operators to the surrounding space (here $\Real^3$) and to solve an embedding equation which is a three-dimensional analog of the original equation. The key simplification is that the extended versions of the operators $\sgrad$, $\sDiv$, and $\slap$ restricted to the surface, will then correspond in the closest point framework to the unrestricted three-dimensional operators $\grad$, $\Div$, and $\lap$. Hence, embedding equations are accessible to standard finite difference techniques where we are not required to mesh and paramaterize the surface. 
+
+In this section, we shall cover the essential details of the closest point method, with particular focus on the modifications needed to implement certain physical effects. \emph{Needs a sentence or two here to draw a distinction with other CPM studies for reviewers benefit...}
 
 \subsection{Surface Representation}
-The closest point method utilizes the \textit{closest point representation} of a surface which is given in terms of the closest point function
-\begin{align}\label{eqn:cp_function}
-	\cp(x) = \arg \min\limits_{\hat{x} \in \surf} |x - \hat{x}|.
-\end{align}
-For a point $x$ in the embedding space, $\cp(x)$ is the point on the surface $\surf$ which is closest in Euclidean distance to $x$.
-This function is well-defined in a tubular neighborhood or narrow band $\band$ of the surface and is as smooth as the underlying surface \cite{Maerz/Macdonald:cpfunctions}.
 
-The closest point function can be derived analytically for many common surfaces.
-When a parameterization or triangulation of the surface is known, the closest point function can be computed numerically \cite{Ruuth/Merriman:jcp08:CPM}.
+The essential component of the closest point method involves the introduction of the \textit{closest point representation} of a surface. This is given in terms of the closest point function,
+\begin{equation}\label{eqn:cp_function}
+	\cp(\x) = \arg \min\limits_{\xhat \in \surf} \|\x - \xhat\|.
+\end{equation}
+%
+That is, \eqref{eqn:cp_function} assigns, for a point $\x$ in $\Real^3$, a point on the surface, $\cp(\x) \in \surf$, which is closest in Euclidean distance. This function is well-defined in a tubular neighborhood or narrow band, $\band$, of the surface and is moreover as smooth as the underlying surface~\cite{marz_2012}.
 
-\todo{illustration of $\cp$}
+The closest point function can be derived analytically for many common surfaces. When a parameterization or triangulation of the surface is known, the closest point function can be computed numerically \cite{ruuth_2008}.
 
 \subsection{Extending Functions and Differential Operators}
 Using the closest point representation, we can extend values of a surface function $u:\surf \to \Real$ 
@@ -336,7 +298,7 @@ into the surrounding band $\band$ by defining $\bar{u} : \band \to \Real$ by
 Notably, $\bar{u}$ will be constant in the direction normal to the surface and this property is key to the closest point method:
 it implies that an application of a Cartesian differential operator to $\bar{u}$
 is equivalent to applying the corresponding intrinsic surface differential operator to $u$.
-We state this as principles below; these mathematical principles were established in \cite{Ruuth/Merriman:jcp08:CPM} and proven in \cite{Maerz/Macdonald:cpfunctions}.
+We state this as principles below; these mathematical principles were established in \cite{ruuth_2008} and proven in \cite{marz_2012}.
 \begin{principle} \label{thm:gradient_principle}
 	\emph{(Gradient Principle):} Let $\surf$ be a surface embedded in $\Real^n$ and let $u$ be a function, defined on $\Real^n$,
 	that is constant along directions normal to the surface, then
@@ -358,7 +320,7 @@ Direct consequences of these principles are
 	\sDiv \vec{j}(x) &= \Div \bar{\vec{j}}(x), \qquad \forall \; x \in \surf, \label{4D_second}
 \end{align}
 where $\bar{\vec{j}}$ is the closest point extension of a tangential flux $\vec{j}$.
-Moreover, since $\grad \bar{u}$ is tangential to level-surfaces of the Euclidean distance-to-$\surf$ map \cite{Ruuth/Merriman:jcp08:CPM,Maerz/Macdonald:cpfunctions}, 
+Moreover, since $\grad \bar{u}$ is tangential to level-surfaces of the Euclidean distance-to-$\surf$ map \cite{ruuth_2008, marz_2012}, 
 combining Principles~\ref{thm:gradient_principle} and \ref{thm:divergence_principle} yields
 \begin{align}
 	\slap u(x) &= \lap \bar{u}(x), \label{4D_third} \\
@@ -373,7 +335,7 @@ Principles \ref{thm:gradient_principle} and \ref{thm:divergence_principle} also 
 \end{align}
 where $\bar{\tens{G}}$ is the closest point extension of $\tens{G}$.
 
-Finally, we note that a closest point extension $\bar{u}$ is characterized \cite{vonGlehn:mol} by
+Finally, we note that a closest point extension $\bar{u}$ is characterized \cite{glehn_2013} by
 \begin{align}
 	\bar{u} &= \bar{u} \circ \cp,
 \end{align}
@@ -410,7 +372,7 @@ condition \eqref{4C_third} guarantees that $v$ stays a closest point extension f
 which give us \eqref{4C_first} as the 3D-analog of \eqref{4B_first}. 
 
 
-In order to cope with condition \eqref{4C_first} Ruuth \& Merriman \cite{Ruuth/Merriman:jcp08:CPM} suggested the following semi-discrete (in time) iteration:
+In order to cope with condition \eqref{4C_first} Ruuth \& Merriman \cite{ruuth_2008} suggested the following semi-discrete (in time) iteration:
 after initialization $v^0 = u^0 \circ \cp$, alternate between two steps
 \begin{subequations}
 	\begin{align}
@@ -439,110 +401,320 @@ operation can also be implemented as an extension matrix $E$ acting on the 1D ar
 	\end{align}
 \end{subequations}
 
-The computation is performed in a \emph{computational band} for two reasons: firstly, the closest point function is defined in the band $\band$ 
-hence the computational band must be contained in $\band$. Secondly, the code can be made more efficient by working on a narrow surrounding the surface $\surf$.
-A nice feature of the Ruuth \& Merriman iteration is that no artificial boundary conditions on the boundary of the band need to be imposed.  
-This has to do with the extension step: the grid points are overwritten at each time step with the value at their closest points.
+The computation is performed in a \emph{computational band} for two reasons: firstly, the closest point function is defined in the band $\band$ hence the computational band must be contained in $\band$. Secondly, the code can be made more efficient by working on a narrow surrounding the surface $\surf$. A nice feature of the Ruuth \& Merriman iteration is that no artificial boundary conditions on the boundary of the band need to be imposed. This has to do with the extension step: the grid points are overwritten at each time step with the value at their closest points.
 Note also, that no artificial boundary conditions are imposed in the embedding problem.
 
 For the sake of efficiency optimization of the width of the computational band is reasonable. 
 The bandwidth depends on the degree of the interpolant and on the finite difference stencil used. 
-Suppose we use an interpolant of degree $p$ and are working in $d$-dimensions, this requires $(p+1)^d$ points around an interpolation point $\cp(x_i)$.
-Furthermore, each of the points in the interpolation stencil must be advanced in time with a finite difference stencil. 
-As a rule of thumb the diameter of the convolution of the interpolation and finite difference stencil gives a good value for the bandwidth.
-More details on finding the optimal band are given in \cite[Appendix A]{cbm:icpm}.
+Suppose we use an interpolant of degree $p$ and are working in $d$-dimensions, this requires $(p+1)^d$ points around an interpolation point $\cp(x_i)$. Furthermore, each of the points in the interpolation stencil must be advanced in time with a finite difference stencil. As a rule of thumb the diameter of the convolution of the interpolation and finite difference stencil gives a good value for the bandwidth.
+More details on finding the optimal band are given in \cite[Appendix A]{macdonald_2009}.
 
 
-\section{Three flows}
+\section{Numerical implementation}
 
-\subsection{Flow on a circular cylinder}
+Explain in this section how the numerics were done in practice. To go over:
+\begin{itemize}
+\item Meshing and time stepping
+\item How was the gravity vector implemented (which is not of surface form)
+\item Contact lines
+\end{itemize}
+
+\section{Numerical results}
+
+By way of demonstrating the power of using the closest point method for the study of thin film flows on curved surfaces, we have chosen to present three examples: the flow on (i) the interior cross section of a circular cylinder; (ii) the exterior of a capped and finite cylinder; and (iii) the exterior of a sphere. We emphasize that each of these different physical situations requires very little modification of the base algorithm.
+
+
+% that cover a variety of situational effects and difficulties in implementing a numerical scheme in practice. shall study . 
+
+% Although the flow on the inside of a 2D cylinder can be easily computed using regular finite differences along the angular direction, it is convenient to use this example as a test for our CP method. Similarly, the flow on the side walls of a circular cylinder have been numerically computed (e.g. \cite{mayo_2013}), but we shall demonstrate how the entire three-dimensional geometry of a finite cylinder can be captured. Finally, as far as we know, there has been few (if any) numerical solutions for the surface of a sphere. 
+
+\subsection{Flow on a 2D circular cylinder}
+
+\noindent As a preliminary example, consider the flow of a thin film on the interior or exterior of a circular cylinder with dimensional radius $L$. It is convenient to select the velocity scale to be $U = \gamma\delta^2/\mu$. This has the effect of setting $\Cn = 1$ so that the leading-order dynamic stress condition is $\Delta p \sim -\K$, and the non-dimensional parameter, $\Bn = \rho g L^2/\gamma = \Bo$, is now the usual Bond number.
+
+We assume the non-dimensionalized cylinder is of unit radius and parameterized by the angular distance, $s_1 = \theta$ ($\theta = 0$ at the top) and axial distance $s_2 = z$. The thin film is located at $\r = (\theta\bm{e}_\theta + z\bm{e}_z) + h(\theta, z, t)\n$ with outward normal $\n = \pm\bm{e}_r$ for cylindrical unit vectors, $\{\bm{e}_r, \bm{e}_\theta, \bm{e}_z\}$. The $\pm$ sign corresponds to exterior/interior flows. We assume that the gravity vector is oriented in the transverse direction, and thus given by $\hatg = -\cos\theta \n + \sin\theta \bm{e}_\theta$.
+
+If we choose to ignore the axial effects, and consider $h = h(\theta, t)$, we obtain the governing equation
+\[
+h_t + \Bigl[\frac{h^3}{3} \Bigl\{ \delta (h_{\theta\theta\theta} + h_\theta) \\
+\mp \delta \Bo \cos\theta h_{\theta} + \Bo \sin\theta \Bigr\} \Bigr]_\theta = 0.
+\]
+%
+where $\mp$ is for exterior/interior flows. Note that with an additional re-scaling of the Bond number this is identical to the derived form of eqn (2) in \cite{trinh_2014}. The partial differential equation is easy to solve using finite differences (see \eg \cite{jensen_1997, king_2007, trinh_2014}), and can be used as a test of the closest point algorithm.
+
+\begin{figure*}[htb]
+\includegraphics{figs/cylindermesh}
+\includegraphics{figs/cylinderprofile}
+\caption{(Left) Mesh and closest point domain. (Right) thin film profiles at different times. Numerics are for $\delta = 0.1$, $\Bo = 100$, $\Delta t = 10^{-5}$, $\Delta x = \Delta y = 0.1$ and plotted every $400$ timesteps. The inset displays the thin film height at the top, $\theta = 0$ as a function of time, with the circles indicating numerical results and the solid line for the asymptotic behaviour.}
+\end{figure*}
+
+As shown in \cite{trinh_2014}, a simple estimate can be developed for the draining speed near the top of the cylinder. If we assume the film takes the form of a uniform profile near $\theta = 0$, a dominant balance indicates $h_t \sim -\Bo [\theta h^3/3]_\theta$ for which $h \sim [1 - (2\Bo/3) t]^{-1/2}$ is a solution.
+
+\subsection{Axial flow on 3D capped cylinder}
+
 \subsection{Flow on a sphere}
 \subsection{Flow on a torus}
 
+\section{Implementation of the full surface curvature}
+
+In the following $S$ denotes the surface of the curved substrate.
+Moreover, we use
+\begin{enumerate}
+\item the convention $\hat{x}$ denotes a point on the substrate surface $\hat{x} \in S$, $x \in \Real^3$ denotes a point in the surrounding
+			(which may or may not happen to be on the substrate surface)
+	\item The function $d$ denotes the signed Euclidean distance to $S$. 
+			$d$ satisfies the Eikonal equation
+			\begin{align}
+				|\nabla d|^2 &= 1.
+			\end{align}
+			Because of that property the gradient gives the normal field $N(\hat{x}) = \nabla d(\hat{x})$.
+			The sign convention for $d$ is such that $N$ points to that side of $S$ where the thin film is.
+	\item $\cp(x)$ denotes the closest point of $x$ on the surface.
+	\item The function $h(t,\hat{x})$ gives the height of the thin film.
+			For an $\hat{x}$ the corresponding point on the free surface is given by
+			\begin{align}
+				\hat{x} + h(t,\hat{x}) \; N(\hat{x})
+			\end{align}
+\end{enumerate}
+	
+Now, we are interested in the free surface curvature. This quantity is easy to compute given a level set function $\varphi$ which
+vanishes on the free surface, and is positive above the free surface and negative below the free surface.
+Construction of such a $\varphi$: 
+if $x$ is somewhere in space, then $\hat{x} := \cp(x)$ gives its closest point on the surface.
+Now, if
+\begin{enumerate}
+	\item $d(x) > h(t,\cp(x))$, then $x$ is above the free surface
+	\item $d(x) = h(t,\cp(x))$, then $x$ is on the free surface
+	\item $d(x) < h(t,\cp(x))$, then $x$ is below the free surface.
+\end{enumerate}
+
+Thus
+\begin{align}
+	\varphi(x) &:= d(x) - h(t,\cp(x))
+\end{align}
+is such a level set function.
+Let
+\begin{align}
+	\hat{h}(t,x) &:= h(t,\cp(x)).
+\end{align}
+That is because in the closest point method we work with the closest point extension of $h$ which is exactly $\hat{h}$.
+So, we can use 
+\begin{align}
+	\varphi(x) &= d(x) - \hat{h}(t,x)
+\end{align}
+
+The free surface curvature $\kappa_f$ is given by
+\begin{align}
+	\kappa_f &= \Div \left( \frac{\nabla \varphi}{|\nabla \varphi|} \right) &  \text{for  } \varphi(x) &= 0.
+\end{align}
+
+For the closest point iteration, this would mean: at each time step do
+\begin{enumerate}
+	\item set $\varphi(x) = d(x) - \hat{h}(t,x)$
+	\item find $\nabla \varphi$ and normalize
+	\item find divergence and set $\kappa_f = \Div \left( \frac{\nabla \varphi}{|\nabla \varphi|} \right)$
+	\item then perform update to get $\hat{h}(t + \tau,x)$
+\end{enumerate}
+\bigskip
+
+Remarks:
+\begin{enumerate}
+	\item	$\kappa_f$ gives a function defined on the surrounding space and in order to get the exact free surface curvature we have to evaluate at the free surface, i.e.
+			if $\hat{x}$ is on the surface we have to evaluate at $\hat{x} + h(t,\hat{x}) \; N(\hat{x})$.
+			Under the usual assumption that $h$ is small, one performs (implicitly) the usual linearization
+			\begin{align}
+				\kappa_f(\hat{x} + h(t,\hat{x}) \; N(\hat{x})) &\approx \kappa_f(\hat{x})
+			\end{align}
+			The only simplification here is with regard to the domain of $\kappa_f$, not the range of $\kappa_f$.
+	\item Everything relies on the fact for $\hat{x} \in S$ the point $\hat{x} + h(t,\hat{x}) \; N(\hat{x})$ is on the free surface.
+			This assumption can only be true if $h$ stays (for all times) smaller than the smallest distance value such that $\nabla d$ is defined.
+			If for some reason $h$ fails to obey this rule, the function $\varphi$ defined above need not obey the explanation given above
+			and thus $\kappa_f$ as computed from $\varphi$ might be meaningless.
+	\item Because of the usually applied nondimensionalization, the function $\varphi$ defined above needs an appropriate scaling!!!
+			Dear modeller, tell me how to scale.
+\end{enumerate}
+
 \section{Discussion}
+
+\begin{itemize}
+\item We have shown how the general thin film equations over an arbitrary curved substrate can be solved using the cloest point method
+\item Most notably, this provides an extremely effective and simple method for studying thin films; numerous advantages over a finite difference approach, which is incapable of studying geometries that are not so easily parameterized (e.g. sphere)
+\item Future challenges include: implicit time stepping schemes; how to better resolve singular behaviour such as rupturing, contact lines, etc.; what is the penalty for violating physical principles (e.g. fluid height going negative?)
+\item Ability to use the full free surface curvature is a powerful idea
+\end{itemize}
+
+
+\acknowledgements{We thank P.D. Howell and H.A. Stone for many helpful discussions}
 
 \newpage
 
 
 \begin{appendix}
 
+\section{Differential geometry}
 
-\section{Differentiation formulae}
-
-Gradient operators:
-\begin{subequations}
-\begin{alignat}{3}
-\nabla &= \sum_i \frac{e_i}{m_i} \pd{}{q_i}, \\
-\nabla \cdot \mb{u} &= \frac{1}{m_1 m_2 m_3} \left[ \pd{}{q_1} ( m_2 m_3 u_1) + \pd{}{q_2} ( m_1 m_3 u_2) + \pd{}{q_3} ( m_1 m_2 u_3) \right] = 0, \\
-&\qquad = \frac{1}{m_1 m_2 m_3} \sum_{i=0}^3 \pd{}{q_i} ( m_j m_k u_i), \label{div} \\
-\nabla^2 &= \frac{1}{m_1 m_2 m_3} \left[ \pd{}{q_1} \left( \frac{m_2 m_3}{m_1} \pd{}{q_1}\right) 
-+ \pd{}{q_2} \left( \frac{m_3 m_1}{m_2} \pd{}{q_2}\right) 
-+ \pd{}{q_3} \left( \frac{m_1 m_2}{m_3} \pd{}{q_3}\right)\right], \\
-&\qquad = \frac{1}{m_1 m_2 m_3} \sum_{i=0}^3  \pd{}{q_i} \left( \frac{m_j m_k}{m_i} \pd{}{q_i}\right).
-\end{alignat}
-\end{subequations}
-
-\noindent Derivatives of unit vectors are \cite[p.483]{happel_book}
-\begin{alignat}{3} 
-\pd{\mb{e}_i}{x_j} &= \frac{\mb{e}_j}{m_i} \pd{m_j}{x_i}  \\ 
-\pd{\mb{e}_i}{x_i} &= -\frac{\mb{e}_j}{m_j} \pd{m_i}{x_j} - 
-\frac{\mb{e}_k}{m_k} \pd{m_i}{x_k}.
-\end{alignat}
-
-\noindent or simply \cite[p.241]{roy_2002}:
+The metric and shape of the substrate, $\rs(s_1, s_2)$, are described using the first and second fundamental forms, $\{\E, \F, \G, \L, \M, \N\}$. Using derivative notation, $\rs_i = \partial_{s_i} \rs$, we define
+\begin{equation}\label{funform}
+\begin{alignedat}{6} 
+\E &= \rs_1 \cdot \rs_1, 
+&\quad \F &= \rs_1 \cdot \rs_2, 
+&\quad \G &= \rs_2 \cdot \rs_2, \\
+\L &= \rs_{11} \cdot \n,
+&\quad \M &= \rs_{12} \cdot \n,
+&\quad \N &= \rs_{22} \cdot \n,
+\end{alignedat}	
+\end{equation}
+%
+where the unit outward normal is 
 \begin{equation}
-\pd{\mb{e}_i}{x_j} = \frac{\mb{e}_j}{m_i} \pd{m_j}{x_i} - \delta_{ij} \sum_{k=1}^3 \frac{\mb{e}_k}{m_k} \pd{m_i}{x_k}.
+\n = \frac{\rs_1 \wedge \rs_2}{|\rs_1 \wedge \rs_2|}.
 \end{equation}
-
-\subsection{Surface quantities}
-\begin{equation} \label{surfdiv}
-\nabla_s \cdot (q_1 \ea + q_2 \eb) = \frac{1}{a_1 a_2} \left[ \pd{}{x_1} (a_2 q_1) + \pd{}{x_2} (a_1 q_2) \right].
-\end{equation}
-
+%
+The two principal curvatures are the two eigenvalues of 
 \begin{equation}
-\nabla_s = \pd{}{x_1} \frac{\ea}{a_1} + \pd{}{x_2} \frac{\eb}{a_2}.
+	\begin{pmatrix}
+	\L & \M \\ \M & \N
+	\end{pmatrix} = \lambda 
+	\begin{pmatrix}
+	\E & \F \\ \F & \G \end{pmatrix}.
 \end{equation}
-
+%
+However, as we have chosen for $(s_1, s_2)$ to correspond to directions of principal curvature, then $F \equiv 0 = \M$, and the two principal curvatures are  
 \begin{equation}
-\nabla_s^2 = \frac{1}{a_1 a_2} \left[ \pd{}{x_1} \left( \frac{a_2}{a_1} \pd{}{x_1}\right) + \pd{}{x_2} \left(\frac{a_1}{a_2} \pd{}{x_2}\right)\right].
+\kappa_1 = \frac{\L}{\E}, \qquad \kappa_2 = \frac{\N}{\G},	
+\end{equation}
+%
+Note that the unit vectors for $(s_1, s_2)$ system are then given by 
+\begin{equation}
+\ea = \frac{\rs_1}{\|\rs_1\|} = \frac{\rs_1}{\E^{1/2}}, \qquad
+\eb = \frac{\rs_2}{\|\rs_2\|} = \frac{\rs_2}{\G^{1/2}}, 
+\end{equation}
+%
+for the associated metric coefficients $a_1 = \|\rs_1\| = \E^{1/2}$ and $a_2 =  \|\rs_2\| = \G^{1/2}$. We have thus completely described the substrate parameterization. 
+
+For the free surface parameterization, $\r = \rs + \ep h \n$, we denote the fundamental forms with tildes $\{\t{E}, \t{F}, \t{\G}, \t{\L}, \t{\M}, \t{\N}\}$, and use the analogous definitions to \eqref{funform} with $\rs$ replaced by $\r$ and $\n$ replaced by $\t{\n}$. This gives, for the first fundamental forms, 
+\begin{equation} \label{tEG}
+\begin{aligned}
+\t{\E} &= \E(1 - \ep h \kappa_1)^2 + \Oh(\ep^2), \quad \F = \Oh(\ep^2) \\
+\t{\G} &= \G(1 - \ep h \kappa_2)^2 + \Oh(\ep^2).
+\end{aligned}	
+\end{equation}
+%
+Effectively, we wish to calculate the free-surface curvature to $\Oh(\ep^2)$. This is 
+\begin{equation} \label{tK}
+\K = \frac{\t{\L}}{\t{\E}} + 
+\frac{\t{\N}}{\t{\G}} + \Oh(\ep^2) \sim \frac{\r_{11} \cdot \t{\n}}{\t{\E}} + 
+\frac{\r_{22} \cdot \t{\n}}{\t{\G}},
+\end{equation}
+%
+however, a mistake that appears in the work of \cite{myers_2002} is due to the use of the substrate normal, $\n$, in the above expression rather than the free-surface normal. 
+
+Note that since $(s_1, s_2, s_3)$ form an orthogonal system, we have $\rs_i \cdot \n = 0$. Consequently, differentiation implies $\rs_{ij} \cdot \n = -\rs_i \cdot \n_j$. This fact allows us to prove that 
+\begin{equation} \label{n12}
+	\begin{aligned}
+\n_1 &= -(\L/\E)\rs_1 = -\kappa_1 \rs_1, \\
+\n_2 &= -(\N/\G)\rs_2= -\kappa_2 \rs_2.	
+	\end{aligned}
 \end{equation}
 
-\section{Stress formula}
 
-\begin{subequations} \label{stress}
+ Next, we note that the free surface normal is 
+\begin{equation} \label{nexpand}
+\t{\n} = \frac{\t{\r}_{11}\wedge \t{\r}_{22}}{\|\t{\r}_{11}\wedge \t{\r}_{22}\|}
+= \n - \ep\Bigl[\frac{h_2}{\G} \rs_2 + \frac{h_1}{\E} \rs_1 \Bigr] + \Oh(\ep^2).		
+\end{equation}
+%
+By differentiating $\rs_i \cdot \rs_j$ and using $\F = \rs_1 \cdot \rs_2 = 0$. We may obtain the two identities,
+\begin{equation} \label{Rijk}
+(\rs_{11} \cdot \rs_i) = -\frac{(-1)^{i}\E_i}{2}, \quad
+(\rs_{22} \cdot \rs_i) = \frac{(-1)^i\G_i}{2}.
+\end{equation}
+%
+Using \eqref{nexpand} and \eqref{Rijk}, this allows us to write
+\begin{equation} \label{Rijn}
+\begin{aligned}
+\rs_{11} \cdot \t{\n} &= \L + \ep \left[\frac{h_2\E_2}{\G} - \frac{h_1\E_1}{\E}\right]\\
+\rs_{22} \cdot \t{\n} &= 
+\N + \ep \left[\frac{h_1\G_1}{\E} - \frac{h_2\G_2}{\G} \right]
+\end{aligned}
+\end{equation}
+
+We may now calculate 
+\begin{equation}
+\begin{aligned}
+\t{\L} &= (\rs_{11} \cdot \t{n}) + \ep \partial_{s_1}^2 (h\n) \cdot \n + \Oh(\ep^2), \\
+\t{\N} &= (\rs_{11} \cdot \t{n}) + \ep \partial_{s_2}^2 (h\n) \cdot \n + \Oh(\ep^2).
+\end{aligned}	
+\end{equation}
+%
+In both lines, the first term follows from \eqref{Rijn} and the centre term can be expanded using the fact that $(\rs_1, \rs_2, \n)$ form an orthogonal triad and applying \eqref{n12}. This yields
+\begin{equation} \label{tLN}
+\begin{aligned}
+\t{\L} &\sim \L + \ep(h_{11} - h\kappa_1^2 \E) + \ep \left[\frac{h_2\E_2}{\G} - \frac{h_1\E_1}{\E}\right] \\
+\t{\N} &\sim \N + \ep(h_{22} - h\kappa_2^2 \G) + \ep \left[\frac{h_1\G_1}{\E} - \frac{h_2\G_2}{\G}\right] 
+\end{aligned}	
+\end{equation}
+%
+and corrects the formulae below eqn. (14) in \cite{myers_2002} to include the additional square bracketted terms. Finally, combining \eqref{tEG}, \eqref{tK}, and \eqref{tLN} gives for the mean curvature
+\begin{equation}
+\K = (\kappa_1 + \kappa_2) + \ep h (\kappa_1^2 + \kappa_2^2) + \ep \slap h + \Oh(\ep^2),
+\end{equation}
+%
+where we have used the 
+\begin{equation}
+\slap h = \frac{\left[\pd{}{s_1} \left(\sqrt{\frac{\G}{\E}}\pd{h}{s_1}\right)
++ \pd{}{s_2} \left(\sqrt{\frac{\E}{\G}}\pd{h}{s_2}\right)\right]}{\sqrt{\E\G}}.
+\end{equation}
+
+Note finally that the scale factors are 
 \begin{align}
-\sigma_{11} &= -p + \frac{2\mu}{m_1} \left[ \pd{u_1}{x_1} + \frac{u_2}{m_2} \pd{m_1}{x_1} + u_3 \pd{m_1}{n} \right] \\ 
-\sigma_{22} &= -p + \frac{2\mu}{m_2} \left[ \pd{u_2}{x_2} + \frac{u_1}{m_1} \pd{m_2}{x_1} + u_3 \pd{m_2}{n} \right] \\ 
-\sigma_{33} &= -p + 2\mu \pd{u_3}{n} \\
-\sigma_{12} &= \frac{\mu}{m_1 m_2} \left[ m_1 \pd{u_1}{x_2} - \pd{m_1}{x_2} u_1 + m_2 \pd{u_2}{x_1} - \pd{m_2}{x_1} u_2 \right] \\ 
-\sigma_{13} &= \frac{\mu}{m_1} \left[ m_1 \pd{u_1}{n} - u_1 \pd{m_1}{n} + \pd{u_3}{x_1} \right] \\ 
-\sigma_{23} &= \frac{\mu}{m_2} \left[ m_2 \pd{u_2}{n} - u_2 \pd{m_2}{n} + \pd{u_3}{x_2} \right].
+m_1^2 &= E(1 - \ep h \kappa_1)^2 \\
+m_2^2 &= G(1 - \ep h \kappa_2)^2 \\
+m_3^2 &= 1.
 \end{align}
-\end{subequations}
 
 
 
+% \section{Differentiation formulae}
 
-\section{Normal and tangents at the surface}
+% Gradient operators:
+% \begin{subequations}
+% \begin{alignat}{3}
+% \nabla &= \sum_i \frac{e_i}{m_i} \pd{}{q_i}, \\
+% \nabla \cdot \mb{u} &= \frac{1}{m_1 m_2 m_3} \left[ \pd{}{q_1} ( m_2 m_3 u_1) + \pd{}{q_2} ( m_1 m_3 u_2) + \pd{}{q_3} ( m_1 m_2 u_3) \right] = 0, \\
+% &\qquad = \frac{1}{m_1 m_2 m_3} \sum_{i=0}^3 \pd{}{q_i} ( m_j m_k u_i), \label{div} \\
+% \nabla^2 &= \frac{1}{m_1 m_2 m_3} \left[ \pd{}{q_1} \left( \frac{m_2 m_3}{m_1} \pd{}{q_1}\right) 
+% + \pd{}{q_2} \left( \frac{m_3 m_1}{m_2} \pd{}{q_2}\right) 
+% + \pd{}{q_3} \left( \frac{m_1 m_2}{m_3} \pd{}{q_3}\right)\right], \\
+% &\qquad = \frac{1}{m_1 m_2 m_3} \sum_{i=0}^3  \pd{}{q_i} \left( \frac{m_j m_k}{m_i} \pd{}{q_i}\right).
+% \end{alignat}
+% \end{subequations}
 
-The surface is given by $n = h(x_1, x_2, t)$, or with $\mb{r}(x_1, x_2, n) = \mb{r}(x_1, x_2) + h(x_1, x_2, t) \ec$. The outwards unit normal vector must be 
-\begin{equation} \label{surfnorm}
-\mb{n} = \frac{\nabla (n-h)}{|\nabla (n-h)|} 
-= \frac{\left[ -\frac{1}{m_1} \pd{h}{x_1} \ea - \frac{1}{m_2} \pd{h}{x_2} \eb + \ec\right] }{|\nabla (n-h)|}
-= \frac{n_1 \ea + n_2 \eb + n_3 \ec}{\sqrt{n_1^2 + n_2^2 + n_3^2}}.
-\end{equation}
+% \noindent Derivatives of unit vectors are \cite[p.483]{happel_book}
+% \begin{alignat}{3} 
+% \pd{\mb{e}_i}{x_j} &= \frac{\mb{e}_j}{m_i} \pd{m_j}{x_i}  \\ 
+% \pd{\mb{e}_i}{x_i} &= -\frac{\mb{e}_j}{m_j} \pd{m_i}{x_j} - 
+% \frac{\mb{e}_k}{m_k} \pd{m_i}{x_k}.
+% \end{alignat}
 
-\begin{multline} \label{curv}
-\scr{K} = \frac{1}{\tilde{m_1} \tilde{m_2}} \left[ \pd{}{x_1} \left( \frac{\tilde{h}_2^2}{\scr{A}} \pd{h}{x_1}\right)
-+ \pd{}{x_2} \left( \frac{\tilde{h}_2^2}{\scr{A}} \pd{h}{x_2}\right)\right] \\
-+ \frac{1}{\scr{A}} \left[ \left(\tilde{h}_1^2 + \left(\pd{h}{x_1}\right)^2\right) \frac{a_2 \kappa_2}{\tilde{h}_1}
-+ \left(\tilde{h}_2^2 + \left(\pd{h}{x_2}\right)^2\right) \frac{a_1 \kappa_1}{\tilde{h}_2}\right]
-\end{multline}
+% \noindent or simply \cite[p.241]{roy_2002}:
+% \begin{equation}
+% \pd{\mb{e}_i}{x_j} = \frac{\mb{e}_j}{m_i} \pd{m_j}{x_i} - \delta_{ij} \sum_{k=1}^3 \frac{\mb{e}_k}{m_k} \pd{m_i}{x_k}.
+% \end{equation}
 
-\noindent where the surface area element is 
-\begin{equation}
-\scr{A} = \sqrt{\tilde{h}_1^2 \tilde{h}_2^2 + \tilde{h}_2^2 \left(\pd{h}{x_1}\right)^2 + \tilde{h}_1^2 \left(\pd{h}{x_2}\right)^2}.
-\end{equation}
+% \subsection{Surface quantities}
+% \begin{equation} \label{surfdiv}
+% \nabla_s \cdot (q_1 \ea + q_2 \eb) = \frac{1}{a_1 a_2} \left[ \pd{}{x_1} (a_2 q_1) + \pd{}{x_2} (a_1 q_2) \right].
+% \end{equation}
+
+% \begin{equation}
+% \nabla_s = \pd{}{x_1} \frac{\ea}{a_1} + \pd{}{x_2} \frac{\eb}{a_2}.
+% \end{equation}
+
+% \begin{equation}
+% \nabla_s^2 = \frac{1}{a_1 a_2} \left[ \pd{}{x_1} \left( \frac{a_2}{a_1} \pd{}{x_1}\right) + \pd{}{x_2} \left(\frac{a_1}{a_2} \pd{}{x_2}\right)\right].
+% \end{equation}
+
 
 %In order to derive the tangential stress, we will need two vectors that span the tangent plane at the point $(x_1, x_2, n)$. If $\mb{t}$ is an arbitrary tangent, then $\mb{n} \cdot \mb{t} = 0$. This gives us two tangent vectors: 
 %\begin{align}
@@ -573,10 +745,10 @@ The surface is given by $n = h(x_1, x_2, t)$, or with $\mb{r}(x_1, x_2, n) = \mb
 %\end{align}
 
 \end{appendix}
+% \bibliographystyle{plain}
+\bibliographystyle{/Users/trinh/Dropbox/documents/bib/styles/apsrev4-1-edit}
+\bibliography{/Users/trinh/GoogleDrive/papers/philmaster}
 
-\bibliographystyle{plain}
-% \bibliographystyle{/Users/trinh/Dropbox/documents/bib/styles/apsrev4-1-edit}
-\bibliography{/Users/trinh/Dropbox/documents/bib/philmaster}
 
 \end{document}
 

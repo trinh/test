@@ -1,0 +1,222 @@
+\documentclass[%
+aps, pre,
+amsmath,amssymb,
+reprint,%
+%author-year,%
+% author-numerical,%
+%superscriptaddress,
+%showpacs, showkeys,
+]{revtex4-1}
+
+\usepackage{graphicx}% Include figure files
+\usepackage{bm}
+
+ \usepackage{tikz}
+  \usetikzlibrary{positioning}
+ \usetikzlibrary{backgrounds}
+ \usetikzlibrary{arrows,shapes}
+ \usetikzlibrary{decorations.markings}
+ \usetikzlibrary{decorations.pathmorphing}
+ \usetikzlibrary{decorations.pathreplacing}
+ \usetikzlibrary{patterns}
+ \usetikzlibrary{calc}
+ \usepackage{pgfplots}
+ \usepackage{pgfplotstable}
+ \usepackage{multirow}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{polar}
+
+ \pgfplotsset{%
+  compat=newest,
+  ylabel style={font=\normalsize},
+  xlabel style={font=\normalsize},
+  minor tick num=4,
+  enlargelimits=false,
+%  axis x line=bottom,
+ % axis y line=left,
+ xtick pos = left,
+ ytick pos = left,
+  every outer x axis line/.style={line width=0.8pt},
+  every outer y axis line/.style={line width=0.8pt},
+  % tick style={line width=0.5pt, gray!80},
+  % tick align=outside,
+  major tick length=0.2cm,
+  minor tick length=0.1cm,
+ }
+ \tikzset{%
+  %Define standard arrow tip
+   >=stealth,
+  every mark/.style={scale=0.5, color=black}}
+
+\tikzstyle{menode}=[scale=0.9, minimum width=1.6cm, rectangle, draw, very thin, fill=gray!5, rounded corners=3pt, font=\small] 
+
+% -------------------------------
+
+\pgfplotsset{
+    recstyle/.style={
+        scale only axis,
+        width=0.35\textwidth,
+        height=0.3\textwidth,
+        yticklabel style={text width=1.3em,align=right},
+    },
+    chistyle/.style={
+        scale only axis,
+        width=0.35\textwidth,
+        height=0.3\textwidth,
+        yticklabel style={text width=2em,align=right},
+    },
+    bifbig/.style={
+        scale only axis,
+        axis on top,
+        width=0.7\textwidth,
+        height=0.5\textwidth,
+        yticklabel style={text width=2em,align=right},
+    },
+    minibif/.style={
+        scale only axis,
+        axis on top,
+        width=0.2\textwidth,
+        height=0.2\textwidth,
+        xtick=\empty,
+        ytick=\empty,
+        % yticklabel style={text width=2em,align=right},
+    },
+    ampstyle/.style={
+        scale only axis,
+        width=0.69\textwidth,
+        height=0.4\textwidth,
+        yticklabel style={text width=2em,align=right},
+    },
+    betastyle/.style={
+        scale only axis,
+        width=0.6\textwidth,
+        height=0.3\textwidth,
+        yticklabel style={text width=1.5em,align=right},
+    },
+    betaampstyle/.style={
+        scale only axis,
+        width=0.6\textwidth,
+        height=0.3\textwidth,
+        yticklabel style={text width=2em,align=right},
+    },
+    stokesstyle/.style={
+        scale only axis,
+        width=0.69\textwidth,
+        height=0.4\textwidth,
+        yticklabel style={text width=2em,align=right},
+    },
+	colormap={matlab}{
+		rgb=(0.647059,0.000000,0.149020)
+		rgb=(0.690632,0.041830,0.149891)
+		rgb=(0.734205,0.083660,0.150763)
+		rgb=(0.777778,0.125490,0.151634)
+		rgb=(0.821351,0.167320,0.152505)
+		rgb=(0.843137,0.178214,0.148148)
+		rgb=(0.843137,0.158170,0.138562)
+		rgb=(0.843137,0.138126,0.128976)
+		rgb=(0.843137,0.118083,0.119390)
+		rgb=(0.843137,0.098039,0.109804)
+		rgb=(0.868410,0.171242,0.143791)
+		rgb=(0.893682,0.244444,0.177778)
+		rgb=(0.918954,0.317647,0.211765)
+		rgb=(0.944227,0.390850,0.245752)
+		rgb=(0.960349,0.441394,0.272331)
+		rgb=(0.967320,0.469281,0.291503)
+		rgb=(0.974292,0.497168,0.310675)
+		rgb=(0.981264,0.525054,0.329847)
+		rgb=(0.988235,0.552941,0.349020)
+		rgb=(0.989107,0.581699,0.355991)
+		rgb=(0.989978,0.610458,0.362963)
+		rgb=(0.990850,0.639216,0.369935)
+		rgb=(0.991721,0.667974,0.376906)
+		rgb=(0.992593,0.704139,0.400871)
+		rgb=(0.993464,0.747712,0.441830)
+		rgb=(0.994336,0.791285,0.482789)
+		rgb=(0.995207,0.834858,0.523747)
+		rgb=(0.996078,0.878431,0.564706)
+		rgb=(0.996950,0.905447,0.605664)
+		rgb=(0.997821,0.932462,0.646623)
+		rgb=(0.998693,0.959477,0.687582)
+		rgb=(0.999564,0.986492,0.728540)
+		rgb=(0.986492,0.994771,0.773856)
+		rgb=(0.959477,0.984314,0.823529)
+		rgb=(0.932462,0.973856,0.873203)
+		rgb=(0.905447,0.963399,0.922876)
+		rgb=(0.878431,0.952941,0.972549)
+		rgb=(0.832244,0.930283,0.959477)
+		rgb=(0.786057,0.907625,0.946405)
+		rgb=(0.739869,0.884967,0.933333)
+		rgb=(0.693682,0.862309,0.920261)
+		rgb=(0.659259,0.839651,0.907625)
+		rgb=(0.636601,0.816993,0.895425)
+		rgb=(0.613943,0.794336,0.883224)
+		rgb=(0.591285,0.771678,0.871024)
+		rgb=(0.568627,0.749020,0.858824)
+		rgb=(0.543355,0.733333,0.850109)
+		rgb=(0.518083,0.717647,0.841394)
+		rgb=(0.492810,0.701961,0.832680)
+		rgb=(0.467538,0.686275,0.823965)
+		rgb=(0.423529,0.656645,0.807843)
+		rgb=(0.360784,0.613072,0.784314)
+		rgb=(0.298039,0.569499,0.760784)
+		rgb=(0.235294,0.525926,0.737255)
+		rgb=(0.172549,0.482353,0.713725)
+		rgb=(0.194336,0.477124,0.711983)
+		rgb=(0.216122,0.471895,0.710240)
+		rgb=(0.237908,0.466667,0.708497)
+		rgb=(0.259695,0.461438,0.706754)
+		rgb=(0.261874,0.431373,0.692375)
+		rgb=(0.244444,0.376471,0.665359)
+		rgb=(0.227015,0.321569,0.638344)
+		rgb=(0.209586,0.266667,0.611329)
+		rgb=(0.192157,0.211765,0.584314)
+	}
+}
+
+
+\usepackage[active, tightpage]{preview}
+
+
+% -------------------------------
+%GRAPHICS PACKAGES --- REMOVE FOR EDITORS
+
+
+
+
+
+\begin{document}
+
+\preprint{Draft Version}
+
+\title[Thin films on curved surfaces]{Thin film flows on general curved surfaces with gravity and surface tension}
+
+\author{Colin B.~Macdonald}%
+\affiliation{Oxford Centre for Collaborative and Applied Mathematics, Mathematical Institute, University of Oxford, Oxford OX2 6GG, UK}
+\author{Thomas M\"{a}rz}%
+\affiliation{Oxford Centre for Collaborative and Applied Mathematics, Mathematical Institute, University of Oxford, Oxford OX2 6GG, UK}
+\author{Philippe H. Trinh}%
+\thanks{Corresponding author: trinh@maths.ox.ac.uk}
+\affiliation{Oxford Centre for Industrial and Applied Mathematics, Mathematical Institute, University of Oxford, Oxford OX2 6GG, UK}
+
+\date{\today}
+
+\pacs{}% PACS
+\keywords{thin film dynamics, closest point method, surface-intrinsic differential equations}%Use showkeys class option if keyword
+
+\section{Introduction}\label{sect:Intro}
+
+\begin{preview}
+\input{tikz/curvcoord.tikz}
+\end{preview}
+
+
+% \begin{preview}
+%  \input{tikz/cylinderprofile.tikz}
+% \end{preview}
+
+% \begin{preview}
+% \input{tikz/cylindermesh.tikz}
+% \end{preview}
+
+\end{document}
+

@@ -1,0 +1,9 @@
+syntax: glob
+*.aux
+*.bbl
+*.blg
+*.log
+*.synctex.gz
+*.out
+*.fdb_latexmk
+.DS_Store

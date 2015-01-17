@@ -1,52 +1,66 @@
 This is BibTeX, Version 0.99d (TeX Live 2014)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thinfilmCPM.aux
-The style file: plain.bst
+The style file: /Users/trinh/Dropbox/documents/bib/styles/apsrev4-1-edit.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: thinfilmCPMNotes.bib
-Database file #2: /Users/trinh/Dropbox/documents/bib/philmaster.bib
-Warning--I didn't find a database entry for "Ruuth/Merriman:jcp08:CPM"
-Warning--I didn't find a database entry for "Maerz/Macdonald:cpfunctions"
-Warning--I didn't find a database entry for "vonGlehn:mol"
-Warning--I didn't find a database entry for "cbm:icpm"
-You've used 4 entries,
-            2118 wiz_defined-function locations,
-            533 strings with 4803 characters,
-and the built_in function-call counts, 1268 in all, are:
-= -- 122
-> -- 56
-< -- 1
-+ -- 24
-- -- 18
-* -- 94
-:= -- 221
-add.period$ -- 12
-call.type$ -- 4
-change.case$ -- 20
-chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 45
-empty$ -- 100
-format.name$ -- 18
-if$ -- 254
-int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 5
-newline$ -- 24
-num.names$ -- 8
-pop$ -- 18
+Database file #2: /Users/trinh/GoogleDrive/papers/philmaster.bib
+Warning--I didn't find a database entry for "mayo_2013"
+Warning--I didn't find a database entry for "trinh_2014"
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+merlin.mbs apsrev4-1.bst 2010-07-25 4.21a (PWD, AO, DPC) hacked
+Control: key (0) 
+Control: author (72) initials jnrlst
+Control: editor formatted (1) identically to author
+Control: production of article title (-1) disabled
+Control: page (0) single
+Control: year (1) truncated
+Control: production of eprint (0) enabled
+You've used 10 entries,
+            5847 wiz_defined-function locations,
+            1669 strings with 16328 characters,
+and the built_in function-call counts, 9224 in all, are:
+= -- 633
+> -- 206
+< -- 59
++ -- 80
+- -- 46
+* -- 1394
+:= -- 945
+add.period$ -- 11
+call.type$ -- 10
+change.case$ -- 42
+chr.to.int$ -- 10
+cite$ -- 10
+duplicate$ -- 863
+empty$ -- 664
+format.name$ -- 126
+if$ -- 1784
+int.to.chr$ -- 1
+int.to.str$ -- 18
+missing$ -- 105
+newline$ -- 83
+num.names$ -- 30
+pop$ -- 373
 preamble$ -- 2
-purify$ -- 17
+purify$ -- 50
 quote$ -- 0
-skip$ -- 28
+skip$ -- 337
 stack$ -- 0
-substring$ -- 84
-swap$ -- 5
-text.length$ -- 1
+substring$ -- 217
+swap$ -- 798
+text.length$ -- 23
 text.prefix$ -- 0
-top$ -- 0
-type$ -- 14
+top$ -- 8
+type$ -- 133
 warning$ -- 0
-while$ -- 13
-width$ -- 5
-write$ -- 47
-(There were 4 warnings)
+while$ -- 26
+width$ -- 0
+write$ -- 137
+(There were 2 warnings)

@@ -1,0 +1,1 @@
+ pdftk figures.pdf burst output 'figure%02d.pdf'
